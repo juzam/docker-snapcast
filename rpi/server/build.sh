@@ -12,3 +12,7 @@ fi
 
 sed -i "s/TEMPLATE_VERSION/$SNAP_VERSION/" Dockerfile
 sed -i "s/TEMPLATE_ARCH/$SNAP_ARCH/" Dockerfile
+
+docker build -t snapserver:${SNAP_VERSION}_${SNAP_ARCH} .
+
+rm Dockerfile

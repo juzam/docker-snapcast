@@ -5,6 +5,7 @@ ENV SNAP_ARCH=TEMPLATE_ARCH
 
 RUN 	apt-get update && \
 	apt-get install -y curl	&& \
+	apt-get install -y libavahi-client3 libavahi-common3 libflac8 libogg0 libvorbis0a libvorbisenc2 init-system-helpers && \
 	curl -LO https://github.com/badaix/snapcast/releases/download/v${SNAP_VERSION}/snapserver_${SNAP_VERSION}_${SNAP_ARCH}.deb && \
 	dpkg -i snapserver_${SNAP_VERSION}_${SNAP_ARCH}.deb && rm snapserver_${SNAP_VERSION}_${SNAP_ARCH}.deb && \
 	apt-get clean 
