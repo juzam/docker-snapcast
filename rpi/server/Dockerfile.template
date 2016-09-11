@@ -1,0 +1,15 @@
+FROM armhf/debian:jessie
+
+ENV SNAP_VERSION=TEMPLATE_VERSION
+ENV SNAP_ARCH=TEMPLATE_ARCH
+
+RUN 	apt-get update && \
+	apt-get install -y curl	&& \
+	curl -LO https://github.com/badaix/snapcast/releases/download/v${SNAP_VERSION}/snapserver_${SNAP_VERSION}_${SNAP_ARCH}.deb && \
+	dpkg -i snapserver_${SNAP_VERSION}_${SNAP_ARCH}.deb && rm snapserver_${SNAP_VERSION}_${SNAP_ARCH}.deb && \
+	apt-get clean 
+	
+
+EXPOSE 1704 1705
+
+ENTRYPOINT ["/usr/sbin/snapserver"]
