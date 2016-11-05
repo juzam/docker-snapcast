@@ -3,11 +3,12 @@ FROM armhf/debian:jessie
 ENV SNAP_VERSION=TEMPLATE_VERSION
 ENV SNAP_ARCH=TEMPLATE_ARCH
 
+ADD https://github.com/badaix/snapcast/releases/download/v${SNAP_VERSION}/snapserver_${SNAP_VERSION}_${SNAP_ARCH}.deb /snapserver.deb
+
 RUN 	apt-get update && \
-	apt-get install -y curl	&& \
 	apt-get install -y libavahi-client3 libavahi-common3 libflac8 libogg0 libvorbis0a libvorbisenc2 init-system-helpers && \
-	curl -LO https://github.com/badaix/snapcast/releases/download/v${SNAP_VERSION}/snapserver_${SNAP_VERSION}_${SNAP_ARCH}.deb && \
-	dpkg -i snapserver_${SNAP_VERSION}_${SNAP_ARCH}.deb && rm snapserver_${SNAP_VERSION}_${SNAP_ARCH}.deb && \
+	dpkg -i /snapserver.deb && rm -f /snapserver.deb && \
+	mkdir /root/.config/snapcast && \
 	apt-get clean 
 	
 
